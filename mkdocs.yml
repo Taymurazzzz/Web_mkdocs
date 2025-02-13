@@ -1,0 +1,4 @@
+site_name: WEB
+nav:
+  - Home: index.md
+  - Лабораторная работа 1: lab1.mdgit init
