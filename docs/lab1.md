@@ -193,6 +193,10 @@ def handle_client(client_socket):
     clients.append(client_socket)
     while True:
         message = client_socket.recv(1024)
+        if message.decode().lower() == 'exit' :
+            clients.remove(client_socket)
+            continue
+        message = f"User{str(client_socket).split(',')[0][18:]}: {message.decode()}".encode()
         broadcast(message, client_socket)
 
 
@@ -239,6 +243,7 @@ def start_client(host='localhost', port=8083):
     while True:
         message = input()
         if message.lower() == 'exit':
+            client_socket.send(message.encode('utf-8'))
             client_socket.close()
             break
         client_socket.send(message.encode('utf-8'))
